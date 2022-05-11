@@ -238,19 +238,20 @@ while not gameover: #GAME LOOP##################################################
         Py2=999
     if Py2 > 999:
         Py2=0
+#player collision
+    if Px > Px2 and Px < Px2 + 50 and Py > Py2 and Py < Py2 + 50:
+        score = 0
+        score2 = 0
+        Px2 = 200
+        Py2 = 200
+        Px = 800
+        Py = 800
+        vx = 0
+        vy = 0
+        vx2 = 0
+        vy2 = 0
         
-#     if Px and Py == Px2 and Py2:
-#         score = 0
-#         score2 = 0
-#         Px2 = 200
-#         Py2 = 200
-#         Px = 800
-#         Py = 800
-#         vx = 0
-#         vy = 0
-#         vx2 = 0
-#         vy2 = 0
-        
+
     #Render Section ---------------------------
     screen.fill((0,0,255))
     screen.blit(Back, (0,0), (0,0,1000,1000))
