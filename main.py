@@ -23,6 +23,10 @@ fishy = pygame.image.load('fishy.png')
 fishy.set_colorkey((255,255,255))
 Back = pygame.image.load('background.png')
 
+eat = pygame.mixer.Sound('nom.wav')
+musica = pygame.mixer.music.load('musica.wav')
+pygame.mixer.music.play(-1)
+
 #CONSTANTS
 LEFT=0
 RIGHT=1
@@ -62,13 +66,13 @@ num1 = random.randrange(1, 800)
 c1 = random.randrange(1, 255)
 c2 = random.randrange(1, 255)
 c3 = random.randrange(1, 255)
-s = random.randrange(10, 100)
+s = 25
 #set up variable to hold mouse position
 xpos=0
 ypos=0
 mousePos = (xpos, ypos)
 
-print('how fast are you trying to go? slow, normal, fast, and extreme')
+print('How fast are you trying to go? slow, normal, fast, and extreme')
 choice = input()
 if choice == 'slow':
     n = 3
@@ -201,23 +205,25 @@ while not gameover: #GAME LOOP##################################################
     
     #try to call the function here, use the new variables
     #(put the call inside an if statement, and only get new points for the circle when it's clicked on)
-    if CircleCollision(num,Px, Py,num1, s)==True:
+    if CircleCollision(num+25,Px+25, Py,num1+5, s)==True:
         num = random.randrange(1, 800)
         num1 = random.randrange(1, 800)
         c1 = random.randrange(1, 255)
         c2 = random.randrange(1, 255)
         c3 = random.randrange(1, 255)
-        s = random.randrange(10, 21)
+        s = 25
+        pygame.mixer.Sound.play(eat)
         frameNum += 1
         score += 1
         
-    elif CircleCollision(num,Px2, Py2,num1, s)==True:
+    elif CircleCollision(num+ 25,Px2+20, Py2,num1+5, s)==True:
         num = random.randrange(1, 800)
         num1 = random.randrange(1, 800)
         c1 = random.randrange(1, 255)
         c2 = random.randrange(1, 255)
         c3 = random.randrange(1, 255)
-        s = random.randrange(10, 21)
+        s = 25
+        pygame.mixer.Sound.play(eat)
         frameNum2 += 1
         score2 += 1
 #player 1 warp zone
@@ -260,7 +266,7 @@ while not gameover: #GAME LOOP##################################################
     screen.blit(text, (750, 10))
     text = font.render(str(score2),1, (0, 255, 0))
     screen.blit(text, (250, 10))
-    screen.blit(fishy,(num, num1,25,25))
+    screen.blit(fishy,(num, num1,20,20))
     screen.blit(Eel, (Px, Py), (frameWidth*frameNum, RowNum*frameHeight, frameWidth, frameHeight))
     screen.blit(Eel2, (Px2, Py2), (frameWidth*frameNum2, RowNum2*frameHeight, frameWidth, frameHeight))    
 
