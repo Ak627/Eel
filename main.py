@@ -256,7 +256,17 @@ while not gameover: #GAME LOOP##################################################
         vy = 0
         vx2 = 0
         vy2 = 0
-        
+    if Px2 > Px and Px2 < Px + 50 and Py2 > Py and Py2 < Py + 50:
+        score = 0
+        score2 = 0
+        Px2 = 200
+        Py2 = 200
+        Px = 600
+        Py = 600
+        vx = 0
+        vy = 0
+        vx2 = 0
+        vy2 = 0
 
     #Render Section ---------------------------
     screen.fill((0,0,255))
