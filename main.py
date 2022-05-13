@@ -12,7 +12,7 @@ red = (255,0,0)
 
 Eel = pygame.image.load('eelface.png') #load your spritesheet
 Eel.set_colorkey((255,255,255))
-# EelB = pygame.image.load('eelbody.png') #load your spritesheet
+# EelB = pygame.image.load('EelBody.png') #load your spritesheet
 # EelB.set_colorkey((255,255,255))
 Eel2 = pygame.image.load('eelface2.png') #load your spritesheet
 Eel2.set_colorkey((255,255,255))
@@ -45,6 +45,10 @@ vy2 = 0
 keys = [False, False, False, False] #this list holds whether each key has been pressed
 second = [False, False, False, False]
 
+tailSize = 0
+tailSize2 = 0
+counter = 0
+
 frameWidth = 50
 frameHeight = 50
 RowNum = 2
@@ -53,6 +57,11 @@ RowNum2 = 0
 frameNum2 = 0
 RowNum3 = 0
 frameNum3 = 0
+
+tailX = []
+tailY = []
+tailX2 = []
+tailY2= []
 
 def CircleCollision(x1,x2,y1,y2, radius):
     if (math.sqrt((x2 - x1)**2 + (y2- y1)**2))<radius:
@@ -85,7 +94,35 @@ elif choice == 'extreme':
 
 while not gameover: #GAME LOOP############################################################
     clock.tick(60) #FPS
-
+    counter += 1
+    if n == 3:
+        if counter > 18:
+            counter =0
+            tailX.insert(0,Px)
+            tailY.insert(0,Py)
+            tailX2.insert(0,Px2)
+            tailY2.insert(0,Py2)
+    if n == 5:
+        if counter > 10:
+            counter = 0
+            tailX.insert(0,Px)
+            tailY.insert(0,Py)
+            tailX2.insert(0,Px2)
+            tailY2.insert(0,Py2)
+    if n == 10:
+        if counter > 5:
+            counter = 0
+            tailX.insert(0,Px)
+            tailY.insert(0,Py)
+            tailX2.insert(0,Px2)
+            tailY2.insert(0,Py2)
+    if n == 50:
+        if counter > 2:
+            counter = 0
+            tailX.insert(0,Px)
+            tailY.insert(0,Py)
+            tailX2.insert(0,Px2)
+            tailY2.insert(0,Py2)
 #event queue (bucket that holds stuff that happens in game and passes to one of the sections below)
 
 
@@ -214,6 +251,7 @@ while not gameover: #GAME LOOP##################################################
         s = 25
         pygame.mixer.Sound.play(eat)
         frameNum += 1
+        tailSize += 1
         score += 1
         
     elif CircleCollision(num+ 25,Px2+20, Py2,num1+5, s)==True:
@@ -225,6 +263,7 @@ while not gameover: #GAME LOOP##################################################
         s = 25
         pygame.mixer.Sound.play(eat)
         frameNum2 += 1
+        tailSize2 += 1
         score2 += 1
 #player 1 warp zone
     if Px < 0:
@@ -256,6 +295,8 @@ while not gameover: #GAME LOOP##################################################
         vy = 0
         vx2 = 0
         vy2 = 0
+        tailSize = 0
+        tailSize2 = 0
     if Px2 > Px and Px2 < Px + 50 and Py2 > Py and Py2 < Py + 50:
         score = 0
         score2 = 0
@@ -267,6 +308,8 @@ while not gameover: #GAME LOOP##################################################
         vy = 0
         vx2 = 0
         vy2 = 0
+        tailSize = 0
+        tailSize2 = 0
 
     #Render Section ---------------------------
     screen.fill((0,0,255))
@@ -277,9 +320,12 @@ while not gameover: #GAME LOOP##################################################
     text = font.render(str(score2),1, (0, 255, 0))
     screen.blit(text, (250, 10))
     screen.blit(fishy,(num, num1,20,20))
+    for i in range (0, tailSize):
+      pygame.draw.rect(screen, (255,255,0), (tailX[i], tailY[i], 50, 50))
     screen.blit(Eel, (Px, Py), (frameWidth*frameNum, RowNum*frameHeight, frameWidth, frameHeight))
+    for i in range (0, tailSize2):
+      pygame.draw.rect(screen, (0,0, 255), (tailX2[i], tailY2[i], 50, 50))
     screen.blit(Eel2, (Px2, Py2), (frameWidth*frameNum2, RowNum2*frameHeight, frameWidth, frameHeight))    
-
 
     pygame.display.flip()
 
