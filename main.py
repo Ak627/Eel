@@ -400,10 +400,17 @@ clock = pygame.time.Clock() #set up clock
 
 while not end:
     screen.fill((0,0,255))
-    font = pygame.font.Font(None, 65)
-    text = font.render(str("GAME OVER"),1, (255,255,255))
-    screen.blit(text, (200,250))
     if score >= 20:
-        screen.blit(text, (133,390))
+        font = pygame.font.Font(None, 65)
+        text = font.render(str("GAME OVER"),1, (255,255,255))
+        screen.blit(text, (200,250))
+        text = font.render(str("Player 2 wins!"),1, (250, 250, 0))
+        screen.blit(text, (415,390))
+    if score2 >= 20:
+        font = pygame.font.Font(None, 65)
+        text = font.render(str("GAME OVER"),1, (255,255,255))
+        screen.blit(text, (200,250))
         text = font.render(str("Player 1 wins!"),1, (250, 250, 0))
         screen.blit(text, (415,390))
+    pygame.display.flip()
+pygame.quit()
