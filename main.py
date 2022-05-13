@@ -7,6 +7,7 @@ screen = pygame.display.set_mode((1000, 1000))  # creates game screen
 screen.fill((0,0,0))
 clock = pygame.time.Clock() #set up clock
 gameover = False #variable to run our game loop
+doExit = False
 red = (255,0,0)
 
 
@@ -81,16 +82,76 @@ xpos=0
 ypos=0
 mousePos = (xpos, ypos)
 
-print('How fast are you trying to go? slow, normal, fast, and extreme')
-choice = input()
-if choice == 'slow':
-    n = 3
-elif choice == 'normal':
-    n = 5
-elif choice == 'fast':
-    n = 10
-elif choice == 'extreme':
-    n = 50
+# print('How fast are you trying to go? slow, normal, fast, and extreme')
+# choice = input()
+# if choice == 'slow':
+#     n = 3
+# elif choice == 'normal':
+#     n = 5
+# elif choice == 'fast':
+#     n = 10
+# elif choice == 'extreme':
+#     n = 50
+while not doExit: #GAME LOOP############################################################
+    clock.tick(60) #FPS
+
+#event queue (bucket that holds stuff that happens in game and passes to one of the sections below)
+    event = pygame.event.wait()    
+
+
+#Input Section------------------------------------------------------------
+
+    if event.type == pygame.MOUSEBUTTONDOWN:#CLICK
+        mousePos = event.pos
+
+
+    if event.type == pygame.QUIT: #close game window
+        break        
+  
+    #physics section-----------------------------------------
+    if mousePos[0] > 133 and mousePos[0] < 233 and mousePos[1] > 439 and mousePos[1] < 489:
+        n = 3
+        doExit= True
+    if mousePos[0] > 437 and mousePos[0] < 537 and mousePos[1] > 439 and mousePos[1] < 489:
+        n = 5
+        doExit= True
+    if mousePos[0] > 767 and mousePos[0] < 867 and mousePos[1] > 439 and mousePos[1] < 489:
+        n = 10
+        doExit= True
+    if mousePos[0] > 233 and mousePos[0] < 723 and mousePos[1] > 639 and mousePos[1] < 689:
+        n = 50
+        doExit= True
+    print(mousePos)
+    #Render Section ---------------------------
+    screen.fill((0,0,0)) #wipes screen black
+    pygame.draw.rect(screen, (0, 255, 255), (133,439, 100, 50))
+    pygame.draw.rect(screen, (255, 255, 0), (437,439, 100, 50))
+    pygame.draw.rect(screen, (0, 255, 0), (767,439, 100, 50))
+    pygame.draw.rect(screen, (255, 0, 0), (233,639, 490, 50))
+    font = pygame.font.Font(None, 65)
+    text = font.render(str("How fast would you like to go?"),1, (255,255,255))
+    screen.blit(text, (200,250))
+    text = font.render(str("slow"),1, (0, 250, 250))
+    screen.blit(text, (133,390))
+    text = font.render(str("normal"),1, (250, 250, 0))
+    screen.blit(text, (415,390))
+    text = font.render(str("fast"),1, (0, 250, 0))
+    screen.blit(text, (778,390))
+    text = font.render(str("extrememe"),1, (250, 0, 0))
+    screen.blit(text, (360,590))
+    pygame.display.flip()  
+
+pygame.quit()
+
+import pygame
+import random
+import math
+pygame.init()  
+pygame.display.set_caption("EEL")  # sets the window title
+screen = pygame.display.set_mode((1000, 1000))  # creates game screen
+screen.fill((0,0,0))
+clock = pygame.time.Clock() #set up clock
+gameover = False #variable to run our game loop
 
 while not gameover: #GAME LOOP############################################################
     clock.tick(60) #FPS
@@ -112,7 +173,7 @@ while not gameover: #GAME LOOP##################################################
     if n == 10:
         if counter > 5:
             counter = 0
-            tailX.insert(0,Px)
+            tailX.insert(0,Px);
             tailY.insert(0,Py)
             tailX2.insert(0,Px2)
             tailY2.insert(0,Py2)
@@ -321,10 +382,10 @@ while not gameover: #GAME LOOP##################################################
     screen.blit(text, (250, 10))
     screen.blit(fishy,(num, num1,20,20))
     for i in range (0, tailSize):
-      pygame.draw.rect(screen, (255,255,0), (tailX[i], tailY[i], 50, 50))
+      pygame.draw.rect(screen, (255,228,141), (tailX[i], tailY[i], 50, 50))
     screen.blit(Eel, (Px, Py), (frameWidth*frameNum, RowNum*frameHeight, frameWidth, frameHeight))
     for i in range (0, tailSize2):
-      pygame.draw.rect(screen, (0,0, 255), (tailX2[i], tailY2[i], 50, 50))
+      pygame.draw.rect(screen, (83,83, 255), (tailX2[i], tailY2[i], 50, 50))
     screen.blit(Eel2, (Px2, Py2), (frameWidth*frameNum2, RowNum2*frameHeight, frameWidth, frameHeight))    
 
     pygame.display.flip()
