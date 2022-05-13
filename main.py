@@ -8,6 +8,7 @@ screen.fill((0,0,0))
 clock = pygame.time.Clock() #set up clock
 gameover = False #variable to run our game loop
 doExit = False
+end = False
 red = (255,0,0)
 
 
@@ -363,7 +364,10 @@ while not gameover: #GAME LOOP##################################################
         vy2 = 0
         tailSize = 0
         tailSize2 = 0
-
+    if score >= 20:
+        gameover = True
+    if score2 >= 20:
+        gameover = True
     #Render Section ---------------------------
     screen.fill((0,0,255))
     screen.blit(Back, (0,0), (0,0,1000,1000))
@@ -384,3 +388,22 @@ while not gameover: #GAME LOOP##################################################
     pygame.display.flip()
 
 pygame.quit()
+
+import pygame
+import random
+import math
+pygame.init()  
+pygame.display.set_caption("EEL")  # sets the window title
+screen = pygame.display.set_mode((1000, 1000))  # creates game screen
+screen.fill((0,0,0))
+clock = pygame.time.Clock() #set up clock
+
+while not end:
+    screen.fill((0,0,255))
+    font = pygame.font.Font(None, 65)
+    text = font.render(str("GAME OVER"),1, (255,255,255))
+    screen.blit(text, (200,250))
+    if score >= 20:
+        screen.blit(text, (133,390))
+        text = font.render(str("Player 1 wins!"),1, (250, 250, 0))
+        screen.blit(text, (415,390))
