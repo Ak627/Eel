@@ -13,8 +13,8 @@ red = (255,0,0)
 
 Eel = pygame.image.load('eelface.png') #load your spritesheet
 Eel.set_colorkey((255,255,255))
-# EelB = pygame.image.load('EelBody.png') #load your spritesheet
-# EelB.set_colorkey((255,255,255))
+EelB = pygame.image.load('eelbody.png') #load your spritesheet
+EelB.set_colorkey((255,255,255))
 Eel2 = pygame.image.load('eelface2.png') #load your spritesheet
 Eel2.set_colorkey((255,255,255))
 # EelB2 = pygame.image.load('eelbody2.png') #load your spritesheet
@@ -81,16 +81,7 @@ xpos=0
 ypos=0
 mousePos = (xpos, ypos)
 
-# print('How fast are you trying to go? slow, normal, fast, and extreme')
-# choice = input()
-# if choice == 'slow':
-#     n = 3
-# elif choice == 'normal':
-#     n = 5
-# elif choice == 'fast':
-#     n = 10
-# elif choice == 'extreme':
-#     n = 50
+
 while not doExit: #GAME LOOP############################################################
     clock.tick(60) #FPS
 
@@ -153,6 +144,7 @@ clock = pygame.time.Clock() #set up clock
 gameover = False #variable to run our game loop
 musica = pygame.mixer.music.load('musica.wav')
 pygame.mixer.music.play(-1)
+
 while not gameover: #GAME LOOP############################################################
     clock.tick(60) #FPS
     counter += 1
@@ -363,8 +355,8 @@ while not gameover: #GAME LOOP##################################################
         score2 = 0
         Px2 = 200
         Py2 = 200
-        Px = 600
-        Py = 600
+        Px = 800
+        Py = 800
         vx = 0
         vy = 0
         vx2 = 0
@@ -383,6 +375,7 @@ while not gameover: #GAME LOOP##################################################
     screen.blit(fishy,(num, num1,20,20))
     for i in range (0, tailSize):
       pygame.draw.rect(screen, (255,228,141), (tailX[i], tailY[i], 50, 50))
+      #screen.blit(EelB, (tailX[i], tailY[i], frameWidth, frameHeight))
     screen.blit(Eel, (Px, Py), (frameWidth*frameNum, RowNum*frameHeight, frameWidth, frameHeight))
     for i in range (0, tailSize2):
       pygame.draw.rect(screen, (83,83, 255), (tailX2[i], tailY2[i], 50, 50))
