@@ -25,8 +25,7 @@ fishy.set_colorkey((255,255,255))
 Back = pygame.image.load('background.png')
 
 eat = pygame.mixer.Sound('nom.wav')
-musica = pygame.mixer.music.load('musica.wav')
-pygame.mixer.music.play(-1)
+
 
 #CONSTANTS
 LEFT=0
@@ -152,7 +151,8 @@ screen = pygame.display.set_mode((1000, 1000))  # creates game screen
 screen.fill((0,0,0))
 clock = pygame.time.Clock() #set up clock
 gameover = False #variable to run our game loop
-
+musica = pygame.mixer.music.load('musica.wav')
+pygame.mixer.music.play(-1)
 while not gameover: #GAME LOOP############################################################
     clock.tick(60) #FPS
     counter += 1
